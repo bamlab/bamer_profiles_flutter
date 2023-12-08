@@ -1,4 +1,4 @@
-import 'package:bamer_profiles_flutter/modules/profile/infra/api.dart';
+import 'package:bamer_profiles_flutter/modules/profile/infra/profile_api.dart';
 import 'package:bamer_profiles_flutter/modules/profile/models/bamer_profile.dart';
 import 'package:bamer_profiles_flutter/modules/profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +40,10 @@ class _HomeViewState extends State<HomeView> {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => ProfileView(
-                        bamerProfile: bamerProfiles[index],
-                      )),
+                builder: (context) => ProfileView(
+                  bamerProfile: bamerProfiles[index],
+                ),
+              ),
             ),
           );
         },

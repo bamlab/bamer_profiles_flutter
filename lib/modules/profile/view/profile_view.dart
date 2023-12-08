@@ -9,11 +9,17 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Bamer Profiles'),
-      ),
-      body: Text(bamerProfile.name),
-    );
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text('Detailed Profile'),
+        ),
+        body: Column(
+          children: [
+            Text(bamerProfile.name),
+            Text(bamerProfile.githubHandle),
+            Text(bamerProfile.phoneNumber),
+            Text(bamerProfile.email),
+          ],
+        ));
   }
 }
