@@ -14,6 +14,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         useMaterial3: true,
+        textTheme: const TextTheme(
+          displayMedium: TextStyle(
+            color: Colors.grey,
+            fontSize: 20,
+          ),
+        ),
       ),
       home: const HomeView(),
     );

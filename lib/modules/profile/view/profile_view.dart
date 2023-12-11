@@ -48,10 +48,7 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(
-      color: Colors.grey,
-      fontSize: 20,
-    );
+    final theme = Theme.of(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -62,23 +59,23 @@ class _ProfileViewState extends State<ProfileView> {
           children: [
             Text(
               widget.bamerProfile.name,
-              style: textStyle,
+              style: theme.textTheme.displayMedium,
             ),
             Text(
               widget.bamerProfile.phoneNumber,
-              style: textStyle,
+              style: theme.textTheme.displayMedium,
             ),
             Text(
               widget.bamerProfile.email,
-              style: textStyle,
+              style: theme.textTheme.displayMedium,
             ),
             Text(
               widget.bamerProfile.githubHandle,
-              style: textStyle,
+              style: theme.textTheme.displayMedium,
             ),
             Text(
               'Number of repositories: ${repos?.length}',
-              style: textStyle,
+              style: theme.textTheme.displayMedium,
             ),
             ...popularRepos.map((repo) => GestureDetector(
                   onTap: () =>
@@ -93,15 +90,15 @@ class _ProfileViewState extends State<ProfileView> {
                     child: Column(children: [
                       Text(
                         repo.name,
-                        style: textStyle,
+                        style: theme.textTheme.displayMedium,
                       ),
                       Text(
                         repo.nbStars.toString(),
-                        style: textStyle,
+                        style: theme.textTheme.displayMedium,
                       ),
                       Text(
                         repo.link,
-                        style: textStyle,
+                        style: theme.textTheme.displayMedium,
                       ),
                     ]),
                   ),
