@@ -15,6 +15,7 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   List<({String link, int nbStars, String name})>? repos;
+  List<({String link, int nbStars, String name})> popularRepos = [];
 
   @override
   void initState() {
@@ -36,6 +37,15 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   @override
+  void didUpdateWidget(covariant ProfileView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (repos != null) {
+      final orderedReposByStar = repos!..sort((a, b) => b.nbStars - a.nbStars);
+      popularRepos = [orderedReposByStar[0], orderedReposByStar[1]];
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -49,6 +59,19 @@ class _ProfileViewState extends State<ProfileView> {
             Text(widget.bamerProfile.email),
             Text(widget.bamerProfile.githubHandle),
             Text('Number of repositories: ${repos?.length}'),
+            ...popularRepos.map((repo) => Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFCCCCCC),
+                    border: Border.all(
+                      color: const Color(0xFF333333),
+                    ),
+                  ),
+                  child: Column(children: [
+                    Text(repo.name),
+                    Text(repo.nbStars.toString()),
+                    Text(repo.link),
+                  ]),
+                ))
           ],
         ));
   }
