@@ -18,10 +18,7 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
     fetchProfiles().then((profiles) {
       setState(() {
-        bamerProfiles = [
-          BamerProfile(
-              name: "Paul", githubHandle: "", phoneNumber: "", email: "")
-        ];
+        bamerProfiles = profiles;
       });
     });
   }
