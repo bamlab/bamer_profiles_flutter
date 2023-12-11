@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bamer_profiles_flutter/modules/profile/models/bamer_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key, required this.bamerProfile});
@@ -47,6 +48,11 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    const textStyle = TextStyle(
+      color: Colors.grey,
+      fontSize: 20,
+    );
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -54,23 +60,51 @@ class _ProfileViewState extends State<ProfileView> {
         ),
         body: Column(
           children: [
-            Text(widget.bamerProfile.name),
-            Text(widget.bamerProfile.phoneNumber),
-            Text(widget.bamerProfile.email),
-            Text(widget.bamerProfile.githubHandle),
-            Text('Number of repositories: ${repos?.length}'),
-            ...popularRepos.map((repo) => Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFCCCCCC),
-                    border: Border.all(
-                      color: const Color(0xFF333333),
+            Text(
+              widget.bamerProfile.name,
+              style: textStyle,
+            ),
+            Text(
+              widget.bamerProfile.phoneNumber,
+              style: textStyle,
+            ),
+            Text(
+              widget.bamerProfile.email,
+              style: textStyle,
+            ),
+            Text(
+              widget.bamerProfile.githubHandle,
+              style: textStyle,
+            ),
+            Text(
+              'Number of repositories: ${repos?.length}',
+              style: textStyle,
+            ),
+            ...popularRepos.map((repo) => GestureDetector(
+                  onTap: () =>
+                      url_launcher.launchUrl(Uri.dataFromString(repo.link)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFCCCCCC),
+                      border: Border.all(
+                        color: const Color(0xFF333333),
+                      ),
                     ),
+                    child: Column(children: [
+                      Text(
+                        repo.name,
+                        style: textStyle,
+                      ),
+                      Text(
+                        repo.nbStars.toString(),
+                        style: textStyle,
+                      ),
+                      Text(
+                        repo.link,
+                        style: textStyle,
+                      ),
+                    ]),
                   ),
-                  child: Column(children: [
-                    Text(repo.name),
-                    Text(repo.nbStars.toString()),
-                    Text(repo.link),
-                  ]),
                 ))
           ],
         ));
